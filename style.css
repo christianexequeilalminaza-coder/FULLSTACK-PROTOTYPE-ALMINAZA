@@ -1,21 +1,14 @@
+.page { display: none; }
+.page.active { display: block; }
 
-.page { 
-    display: none; 
-}
-.page.active { 
-    display: block; 
-}
+/* Role-based visibility logic */
+body.not-authenticated .role-logged-in { display: none !important; }
+body.authenticated .role-logged-out { display: none !important; }
 
-body.not-authenticated .role-logged-in { 
-    display: none !important; 
-}
-body.authenticated .role-logged-out { 
-    display: none !important; 
-}
+/* Admin-only visibility logic */
+.role-admin { display: none !important; }
+body.is-admin .role-admin { display: inline-block !important; }
 
-.role-admin { 
-    display: none !important; 
-}
-body.is-admin .role-admin { 
-    display: block !important; 
-}
+/* Simple UI polish */
+.card { border-radius: 12px; }
+nav { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }

@@ -9,64 +9,110 @@
 </head>
 <body class="not-authenticated">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Full-Stack App (Alminaza)</a>
-            <div class="ms-auto">
-                <div class="role-logged-out">
-                    <button class="btn btn-outline-light btn-sm" onclick="showPage('login')">Login</button>
-                    <button class="btn btn-light btn-sm" onclick="showPage('register')">Register</button>
-                </div>
-                
-                <div class="dropdown role-logged-in">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        User Account
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#" onclick="showPage('profile')">Profile</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="showPage('requests')">My Requests</a></li>
-                        <li class="role-admin"><hr class="dropdown-divider"></li>
-                        <li class="role-admin"><a class="dropdown-item" href="#">Employees</a></li>
-                        <li class="role-admin"><a class="dropdown-item" href="#">Accounts</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
-                    </ul>
-                </div>
+            <a class="navbar-brand" href="#/">Full-Stack App (Alminaza)</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item role-logged-out"><a class="nav-link" href="#/login">Login</a></li>
+                    <li class="nav-item role-logged-out"><a class="nav-link" href="#/register">Register</a></li>
+                    
+                    <li class="nav-item role-admin"><a class="nav-link" href="#/employees">Employees</a></li>
+                    <li class="nav-item role-admin"><a class="nav-link" href="#/departments">Departments</a></li>
+                    <li class="nav-item role-admin"><a class="nav-link" href="#/accounts">Accounts</a></li>
+
+                    <li class="nav-item dropdown role-logged-in">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="#/requests">My Requests</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-   <main class="container mt-4">
-    <section id="home" class="page active">
-        <h1>Welcome to Full-Stack App</h1>
-        <button class="btn btn-primary" onclick="navigateTo('#/register')">Get Started</button>
-    </section>
+    <main class="container mt-5">
+        <section id="home" class="page">
+            <div class="jumbotron shadow p-5 mb-4 bg-light rounded-3">
+                <h1 class="display-4">Welcome to Alminaza's App</h1>
+                <p class="lead">A complete prototype simulating full-stack behavior.</p>
+                <hr class="my-4">
+                <button class="btn btn-primary btn-lg" onclick="navigateTo('#/register')">Get Started</button>
+            </div>
+        </section>
 
-    <section id="register" class="page">
-        <h2>Register Account</h2>
-        <form onsubmit="handleRegister(event)">
-            <input type="text" id="regFirst" class="form-control mb-2" placeholder="First Name" required>
-            <input type="email" id="regEmail" class="form-control mb-2" placeholder="Email" required>
-            <input type="password" id="regPass" class="form-control mb-2" placeholder="Password (min 6 chars)" minlength="6" required>
-            <button type="submit" class="btn btn-success">Sign Up</button>
-        </form>
-    </section>
+        <section id="register" class="page">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card shadow-sm p-4">
+                        <h3>Register Account</h3>
+                        <form onsubmit="handleRegister(event)">
+                            <div class="mb-3"><label>First Name</label><input type="text" id="regFirst" class="form-control" required></div>
+                            <div class="mb-3"><label>Last Name</label><input type="text" id="regLast" class="form-control" required></div>
+                            <div class="mb-3"><label>Email</label><input type="email" id="regEmail" class="form-control" required></div>
+                            <div class="mb-3"><label>Password</label><input type="password" id="regPass" class="form-control" minlength="6" required></div>
+                            <button type="submit" class="btn btn-success w-100">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="verify-email" class="page text-center">
-        <h2>Verify Your Email</h2>
-        <div class="alert alert-warning">A verification link has been sent!</div>
-        <button class="btn btn-primary" onclick="simulateVerification()">✅ Simulate Email Verification</button>
-    </section>
+        <section id="verify-email" class="page text-center">
+            <div class="alert alert-warning">
+                <h2>Check Your Inbox</h2>
+                <p id="verify-msg">Verification sent to your email.</p>
+                <button class="btn btn-primary" onclick="simulateVerification()">✅ Simulate Email Verification</button>
+            </div>
+        </section>
 
-    <section id="login" class="page">
-        <h2>Login</h2>
-        <form onsubmit="handleLogin(event)">
-            <input type="email" id="loginEmail" class="form-control mb-2" placeholder="Email">
-            <input type="password" id="loginPass" class="form-control mb-2" placeholder="Password">
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </section>
-</main>
+        <section id="login" class="page">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-4">
+                        <h3>Login</h3>
+                        <form onsubmit="handleLogin(event)">
+                            <div class="mb-3"><label>Email</label><input type="email" id="loginEmail" class="form-control" required></div>
+                            <div class="mb-3"><label>Password</label><input type="password" id="loginPass" class="form-control" required></div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile" class="page">
+            <div id="profile-content" class="card p-4 mx-auto" style="max-width: 500px;"></div>
+        </section>
+
+        <section id="accounts" class="page">
+            <h3>Manage Accounts</h3>
+            <table class="table table-striped mt-3">
+                <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Verified</th></tr></thead>
+                <tbody id="accounts-list"></tbody>
+            </table>
+        </section>
+
+        <section id="requests" class="page">
+            <div class="d-flex justify-content-between">
+                <h3>My Requests</h3>
+                <button class="btn btn-primary btn-sm" onclick="alert('New Request Form Coming Soon')">+ New Request</button>
+            </div>
+            <table class="table mt-3">
+                <thead><tr><th>Type</th><th>Status</th><th>Date</th></tr></thead>
+                <tbody id="requests-list"></tbody>
+            </table>
+        </section>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
