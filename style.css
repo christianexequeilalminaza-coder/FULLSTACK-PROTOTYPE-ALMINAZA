@@ -1,0 +1,21 @@
+
+.page { 
+    display: none; 
+}
+.page.active { 
+    display: block; 
+}
+
+body.not-authenticated .role-logged-in { 
+    display: none !important; 
+}
+body.authenticated .role-logged-out { 
+    display: none !important; 
+}
+
+.role-admin { 
+    display: none !important; 
+}
+body.is-admin .role-admin { 
+    display: block !important; 
+}
