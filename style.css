@@ -7,8 +7,10 @@ body.authenticated .role-logged-out { display: none !important; }
 
 /* Admin-only visibility logic */
 .role-admin { display: none !important; }
-body.is-admin .role-admin { display: inline-block !important; }
+body.is-admin .role-admin { display: block !important; }
 
 /* Simple UI polish */
 .card { border-radius: 12px; }
 nav { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+
+#toast-container { z-index: 1080; }
